@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} UpdateCourse {% endblock title %}
+
+{% block updatecourse %}
+
+
+{% comment %}
+
+<div>
+    {% for i in update_coures_data %}
+    <form action="{% url 'courseupdatesave' i.id %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        Course Name <br>
+        <input type="text" name="c_name" id="" value="{{i.c_name}}"><br>
+        <hr>
+        Course Photo <br>
+        <input type="file" name="c_photo" id=""><br>
+        <hr>
+        Fee <br>
+        <input type="text" name="fee" id=""><br>
+        <hr>
+        Note <br>
+        <input type="text" name="c_note" id=""><br>
+        <hr>
+        
+        <input type="submit" name="" id="" value="Edit and Update">
+        
+
+    </form>
+    {% endfor %}
+</div>
+
+{% endcomment %}
+
+
+<div class="container">
+  <!-- Content here -->
+    {% for i in update_coures_data %}
+    <form action="{% url 'courseupdatesave' i.id %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+            <div class="mb-3">
+            <label for="formGroupExampleInput" class="form-label">Course Name</label>
+            <input type="text" name="c_name" class="form-control" id="formGroupExampleInput" placeholder="{{i.c_name}}">
+            </div>
+
+            <div class="mb-3">
+            <label for="formGroupExampleInput" class="form-label">Course Note</label>
+            <input type="text" name="c_note" class="form-control" id="formGroupExampleInput" placeholder="{{i.c_note}}">
+            </div>
+
+            <div class="mb-3">
+            <label for="formGroupExampleInput" class="form-label">Course Fee</label>
+            <input type="text" name="fee" class="form-control" id="formGroupExampleInput" placeholder="{{i.fee}}">
+            </div>
+
+            <div class="mb-3">
+            <label for="formGroupExampleInput" class="form-label">Course Photo</label><br><br>
+            <img src="{{ i.c_photo.url }}" alt="imgae"> <br>
+            <input type="file" name="" id="">
+
+            
+           
+            </div>
+
+            
+  
+        <input type="submit" name="" id="" value="Edit and Update">
+        
+
+    </form>
+    {% endfor %}
+
+</div>
+
+{% endblock updatecourse %}

@@ -1,0 +1,43 @@
+   
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Create Course {% endblock title %}
+
+{% block createcourse %}
+
+   
+   <div class="container my-4">
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h5 class="mb-0">Add New Course</h5>
+    </div>
+    <div class="card-body">
+      <form action="{% url 'savecourse' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        {% for field in fm %}
+          <div class="mb-3">
+            <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}
+              <div class="text-danger small">{{ field.errors|striptags }}</div>
+            {% endif %}
+          </div>
+        {% endfor %}
+          
+        <div id="liveAlertPlaceholder"></div>
+        <button type="submit" class="btn btn-primary" id="liveAlertBtn">Save Course</button>
+
+        <button type="submit" class="btn btn-success">Save Course</button>
+
+        
+      </form>
+    </div>
+  </div>
+</div>
+
+
+{% endblock createcourse %}
+  

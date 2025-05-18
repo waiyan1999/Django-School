@@ -1,0 +1,65 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Course Detail {% endblock title %}
+
+{% block coursedetail %}
+
+    <!-- Courses Course Details Section -->
+    <section id="courses-course-details" class="courses-course-details section">
+
+      <div class="container" data-aos="fade-up">
+
+        <div class="row">
+
+            {% for i in course_details %}
+
+          <div class="col-lg-8">
+            <img src="assets/img/course-details.jpg" class="img-fluid" alt="">
+            <h3> {{ i.c_name }} </h3>
+            <p>
+                 {{ i.c_note }}
+            </p>
+          </div>
+          <div class="col-lg-4">
+
+            <div class="course-info d-flex justify-content-between align-items-center">
+              <h5>Trainer</h5>
+              <p><a href="#">Walter White</a></p>
+            </div>
+
+            <div class="course-info d-flex justify-content-between align-items-center">
+              <h5>Course Fee</h5>
+              <p>$ {{ i.fee }}</p>
+            </div>
+
+            <div class="course-info d-flex justify-content-between align-items-center">
+              <h5>Available Seats</h5>
+              <p>30</p>
+            </div>
+
+            <div class="course-info d-flex justify-content-between align-items-center">
+              <h5>Schedule</h5>
+              <p>5.00 pm - 7.00 pm</p>
+            </div>
+
+            <a href="" class="btn btn-outline-primary btn-sm mt-2">Save Course</a>
+            <a href="{% url 'deletecourse' i.id %}" class="btn btn-outline-primary btn-sm mt-2">Delete</a>
+
+           
+            <a href="{% url 'courseupdate' i.id %}" class="btn btn-outline-primary btn-sm mt-2">Update</a>
+
+            <a href="{% url 'updatecourse1' i.id %}" class="btn btn-outline-primary btn-sm mt-2">Update1</a>
+           
+
+          </div>
+
+          {% endfor %}
+
+        </div>
+
+      </div>
+
+    </section><!-- /Courses Course Details Section -->
+
+{% endblock coursedetail %}

@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Courses {% endblock title %}
+
+{% block courses %}
+<!-- Courses Section -->
+<section id="courses" class="courses section">
+
+  <div class="container">
+
+    <h3>Total Courses &Tab;<span class="badge text-bg-secondary">{{ course_data|length }}</span></h3>
+
+    <!-- <div class="text-center my-4"> -->
+      <a href="{% url 'createcourse' %}" class="btn btn-primary">Upload Course</a> <br><br>
+    <!-- </div><br>  -->
+
+    <div class="row">
+      {% for i in course_data %}
+      <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+        <div class="course-item">
+          <a href="{% url 'coursedetails' i.id %}" class="category">
+            <img src="{{ i.c_photo.url }}" class="img-fluid" alt="Course Image">
+          </a>
+          
+          <div class="course-content">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <a href="{% url 'coursedetails' i.id %}" class="category"><p class="category"> {{i.c_name}}</p></a>
+
+              <p class="price">${{ i.fee }}</p>
+            </div>
+
+            <h3><a href="#">{{ i.c_name }}</a></h3>
+            <p class="description">{{ i.c_note }}</p>
+
+            <div class="trainer d-flex justify-content-between align-items-center">
+              <!-- <div class="trainer-profile d-flex align-items-center">
+                <img src="{% static 'assets/img/trainers/default.jpg' %}" class="img-fluid" alt="Trainer">
+                <a href="#" class="trainer-link">Trainer</a>
+              </div> -->
+              <!-- <div class="trainer-rank d-flex align-items-center">
+                <i class="bi bi-person user-icon"></i>&nbsp;0
+                &nbsp;&nbsp;
+                <i class="bi bi-heart heart-icon"></i>&nbsp;0
+              </div> -->
+            </div>
+
+            <div class="mt-3">
+              <p class="text-muted"><strong>Time:</strong> {{ i.c_time }} <p>{{ i.c_time|timesince}}</p></p>
+
+              {% comment %}
+              <a href="{% url 'courseupdate' i.id %}" class="btn btn-outline-primary btn-sm mt-2">Edit</a>
+              <a href="{% url 'courseupdate' i.id %}" class="btn btn-outline-primary btn-sm mt-2">Detail</a>
+              {% endcomment %}
+              
+              <a href="{% url 'coursedetails' i.id %}" class="btn btn-outline-primary btn-sm mt-2">Detail</a>
+              <a href="" class="btn btn-outline-primary btn-sm mt-2">Save Course</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <p>No courses available.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<!-- /Courses Section -->
+
+
+{% endblock courses %}
