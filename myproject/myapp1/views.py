@@ -1,6 +1,11 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,HttpResponse
 from myapp1.models import Teacher,Course
 from myapp1.form import ModelForm
+
+from django.contrib.auth.models import User  # aut-table
+from django.contrib.auth import authenticate,login,logout  # authenticate
+
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -9,6 +14,7 @@ def index(request):
 
 def about(request):
     return render(request,'about.html')
+
 
 def contact(request):
     return render(request,'contact.html')
@@ -21,6 +27,7 @@ def courses(request):
     context = {'course_data':course_data}
     return render(request,'courses.html',context)
 
+@login_required(login_url='login')
 def events(request):
     return render(request,'events.html')
 
@@ -115,9 +122,44 @@ def updatecourse1(request,id):
     context = {'update':obj}
     
     return render(request,'updatecourse1.html',context)
-        
-        
 
+# =================== Day 14  Djanog 9 ==========================
 
-
+def loginView(request):
     
+    if request.method == 'POST':
+        username = request.POST.get('l_name')
+        password = request.POST.get('l_password')
+        
+        
+        # if username == 'admin' and password == 'admin':
+        #     print('Login in Successfully')
+        #     return redirect('index')
+        # else:
+        #     return render(request,'login.html')
+   
+        
+        usr_auth = authenticate(username = username,password = password)
+        if usr_auth:
+            print ('success')
+            # return HttpResponse('Success')
+            login(request,usr_auth)
+            return redirect('index')
+        
+        else:
+            print ('fail')
+            # return HttpResponse('Error')
+            return redirect('login')
+        
+    else:
+        return render(request,'login.html')
+    
+
+
+def logoutView(request):
+    logout(request)
+    return redirect('login')  
+        
+
+
+

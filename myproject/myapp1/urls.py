@@ -22,6 +22,8 @@ urlpatterns = [
     path('coursedetails/<int:id>/',courseDetail, name = 'coursedetails'),
     path('deletecourse/<int:id>/',deleteCourse, name = 'deletecourse'),
     path('updatecourse1/<int:id>/',updatecourse1, name = 'updatecourse1'),
+    path('login/',loginView, name = 'login'),
+    path('logout/',logoutView, name = 'logout'),
     
     
 ]

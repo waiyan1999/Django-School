@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Login Form {% endblock title %}
+
+{% block login %}
+
+<div class="container">
+    <h3>This is Login Form</h3>
+
+    <form action="" method="post">
+
+        {% csrf_token %}
+        User Name <br>
+        <input type="text" name="l_name" id="" class="form-control">
+
+        Password <br>
+        <input type="password" name="l_password" id="" class="form-control"> <br>
+
+        <input type="submit" name="" id="" value="Login" class="btn btn-primary form-control">
+    </form>
+
+</div>
+
+{% endblock login %}
